@@ -1,3 +1,12 @@
+import java.util.Properties
+
+val localProperties = rootProject.file("local.properties")
+val properties = Properties()
+properties.load(localProperties.inputStream())
+
+val apiKey: String = properties["API_KEY"] as String
+
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -18,6 +27,12 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField("String", "API_KEY", "\"$apiKey\"")
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {
@@ -50,6 +65,7 @@ android {
 }
 
 dependencies {
+    implementation("io.github.cdimascio:java-dotenv:5.2.2")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.runtime.ktx)
