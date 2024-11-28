@@ -7,7 +7,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -17,6 +16,7 @@ import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.sergio.nytimes.domain.model.News
 import com.sergio.nytimes.domain.model.NewsDetail
+import com.sergio.nytimes.views.utils.LoadingScreen
 
 @Composable
 fun NewsListScreen(
@@ -33,16 +33,6 @@ fun NewsListScreen(
         LoadingScreen()
     } else {
         NewsListContent(newsList = newsList, navController = navController)
-    }
-}
-
-@Composable
-fun LoadingScreen() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        CircularProgressIndicator()
     }
 }
 
@@ -68,7 +58,7 @@ fun NewsItemCard(newsDetail: NewsDetail, navController: NavController) {
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
-                navController.navigate("news_detail/${newsDetail.uuid}") // Navigate to detail
+                navController.navigate("news_detail/${newsDetail.uuid}")
             },
         shape = MaterialTheme.shapes.medium,
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
@@ -96,7 +86,7 @@ fun NewsItemCard(newsDetail: NewsDetail, navController: NavController) {
                 text = newsDetail.description ?: "No Description Available",
                 style = MaterialTheme.typography.bodyMedium,
                 color = Color.Gray,
-                maxLines = 2 // Limit description length
+                maxLines = 2
             )
 
             Spacer(modifier = Modifier.height(8.dp))

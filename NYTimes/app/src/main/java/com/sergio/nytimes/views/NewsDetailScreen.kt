@@ -3,14 +3,11 @@ package com.sergio.nytimes.views
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -21,6 +18,8 @@ import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.sergio.nytimes.domain.model.NewsDetail
 import com.sergio.nytimes.presentation.NewsDetailViewModel
+import com.sergio.nytimes.views.utils.GoBackButton
+import com.sergio.nytimes.views.utils.LoadingScreen
 
 @Composable
 fun NewsDetailScreen(
@@ -40,16 +39,6 @@ fun NewsDetailScreen(
         LoadingScreen()
     } else {
         NewsDetailContent(newsDetail = newsDetail!!, navController)
-    }
-}
-
-@Composable
-fun LoadingScreen() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        CircularProgressIndicator()
     }
 }
 
@@ -133,18 +122,5 @@ fun CategoriesRow(categories: List<String>) {
                 )
             }
         }
-    }
-}
-
-@Composable
-fun GoBackButton(navController: NavController) {
-    IconButton(
-        onClick = { navController.popBackStack() },
-        modifier = Modifier.padding(bottom = 16.dp)
-    ) {
-        Icon(
-            imageVector = Icons.Default.ArrowBack,
-            contentDescription = "Go Back"
-        )
     }
 }
