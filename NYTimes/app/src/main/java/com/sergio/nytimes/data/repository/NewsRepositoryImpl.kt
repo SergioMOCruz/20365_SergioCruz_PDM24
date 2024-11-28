@@ -7,19 +7,14 @@ import com.sergio.nytimes.domain.repository.NewsRepository
 
 class NewsRepositoryImpl(private val api: NewYorkTimesAPI) : NewsRepository {
     override suspend fun getNews(): List<News> {
-        val newsDto = api.getArtNews(RetrofitInstance.API_KEY)
+        val newsDto = api.getNews(RetrofitInstance.API_KEY)
         return listOf(
             News(
-                status = newsDto.status,
-                copyright = newsDto.copyright,
-                section = newsDto.section,
-                last_updated = newsDto.last_updated,
-                num_results = newsDto.num_results,
-                results = newsDto.results.map { it.toNewsDetail() }
+                meta = newsDto.meta,
+                data = newsDto.data.map { it.toNewsDetail() }
             )
         )
     }
-
 }
 
 

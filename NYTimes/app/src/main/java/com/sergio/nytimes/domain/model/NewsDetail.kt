@@ -1,13 +1,17 @@
 package com.sergio.nytimes.domain.model
 
-import com.sergio.nytimes.data.remote.model.MultimediaImageDto
-
 data class NewsDetail(
-    val section: String,
-    val subsection: String,
+    val uuid: String,
     val title: String,
-    val abstract: String,
-    val created_date: String,
+    val description: String?,
+    val keywords: String?,
+    val snippet: String?,
     val url: String,
-    val multimedia: Array<MultimediaImageDto>?
+    val image_url: String?,
+    val language: String?,
+    val published_at: String?,
+    val source: String?,
+    val categories: List<String>?,
+    val relevance_score: Double?,
+    val locale: String?
 )

@@ -1,25 +1,35 @@
-package com.sergio.nytimes.data.remote.model
-
 import com.sergio.nytimes.domain.model.NewsDetail
 
 data class NewsDetailDto(
-    val section: String,
-    val subsection: String,
+    val uuid: String,
     val title: String,
-    val abstract: String,
-    val created_date: String,
+    val description: String?,
+    val keywords: String?,
+    val snippet: String?,
     val url: String,
-    val multimedia: Array<MultimediaImageDto>?
+    val image_url: String?,
+    val language: String?,
+    val published_at: String?,
+    val source: String?,
+    val categories: List<String>?,
+    val relevance_score: Double?,
+    val locale: String?
 ) {
     fun toNewsDetail(): NewsDetail {
         return NewsDetail(
-            section = section,
-            subsection = subsection,
+            uuid = uuid,
             title = title,
-            abstract = abstract,
-            created_date = created_date,
+            description = description,
+            keywords = keywords,
+            snippet = snippet,
             url = url,
-            multimedia = multimedia
+            image_url = image_url,
+            language = language,
+            published_at = published_at,
+            source = source,
+            categories = categories,
+            relevance_score = relevance_score,
+            locale = locale
         )
     }
 }
